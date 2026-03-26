@@ -16,13 +16,17 @@ git config --local protocol.file.allow always
 echo "Syncing internal strategy (Submodules)..."
 git submodule update --init --recursive
 
-# 3. Check for Project Dependencies
+# 3. FIX: Prevent Detached HEAD
+# This ensures the dev is on 'main' and can push immediately
+git -C docs/internal checkout main
+
+# 4. Check for Project Dependencies
 if [ -f "package.json" ]; then
     echo "Installing React Native/Expo dependencies..."
     npm install
 fi
 
-# 4. Final Sync Verification
+# 5. Final Sync Verification
 if [ -d "docs/internal/.git" ] || [ -f "docs/internal/.git" ]; then
     echo -e "${GREEN}Internal Core Synced Successfully.${NC}"
 else
@@ -30,7 +34,7 @@ else
     exit 1
 fi
 
-# 5. Automated "First Read" (The Governance Guardrail)
+# 6. Automated "First Read" (The Governance Guardrail)
 echo -e "${YELLOW}Opening Team Operations Guide (COMMITS.md)...${NC}"
 sleep 1
 
