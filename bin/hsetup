@@ -1,0 +1,49 @@
+#!/bin/bash
+# bin/hsetup - HALA Environment Onboarding & Synchronization
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' 
+
+echo -e "${YELLOW}--- HALA Environment Setup ---${NC}"
+
+# 1. Scope-Locked Git Protocol (Local Only)
+echo "Adjusting local Git protocols (Safe Scope)..."
+git config --local protocol.file.allow always
+
+# 2. Hydrate the Private Internal Core
+echo "Syncing internal strategy (Submodules)..."
+git submodule update --init --recursive
+
+# 3. Check for Project Dependencies
+if [ -f "package.json" ]; then
+    echo "Installing React Native/Expo dependencies..."
+    npm install
+fi
+
+# 4. Final Sync Verification
+if [ -d "docs/internal/.git" ] || [ -f "docs/internal/.git" ]; then
+    echo -e "${GREEN}Internal Core Synced Successfully.${NC}"
+else
+    echo -e "${RED}Sync Failed. Check SSH access to the private repository.${NC}"
+    exit 1
+fi
+
+# 5. Automated "First Read" (The Governance Guardrail)
+echo -e "${YELLOW}Opening Team Operations Guide (COMMITS.md)...${NC}"
+sleep 1
+
+# Try to open with the user's preferred editor, fallback to cat
+if [ -n "$EDITOR" ]; then
+    $EDITOR docs/COMMITS.md
+elif command -v nvim &> /dev/null; then
+    nvim docs/COMMITS.md
+elif command -v vim &> /dev/null; then
+    vim docs/COMMITS.md
+else
+    cat docs/COMMITS.md
+fi
+
+echo -e "${GREEN}Environment Ready. Use ${YELLOW}./bin/hpush${NC}${GREEN} for all future deployments.${NC}"
+
