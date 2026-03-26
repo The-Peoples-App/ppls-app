@@ -1,0 +1,9 @@
+docs/internal/
+
+# Standard React Native / Expo ignores
+node_modules/
+.expo/
+ios/
+android/
+.env*.local
+docs/PROPOSAL*.md

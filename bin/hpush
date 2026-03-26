@@ -1,0 +1,36 @@
+#!/bin/bash
+# HALA Push Auditor: Ensures Inside-Out Synchronization
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' 
+
+SUBMODULE_PATH="docs/internal"
+
+echo -e "${YELLOW}--- HALA Push Auditor ---${NC}"
+
+# 1. Check for uncommitted changes in Internal
+if [[ -n $(git -C "$SUBMODULE_PATH" status --porcelain) ]]; then
+    echo -e "${RED}ERR: UNCOMMITTED INTERNAL CONTENT${NC}"
+    echo -e "Action: ${GREEN}cd $SUBMODULE_PATH && git add . && git commit -m '...'${NC}"
+    exit 1
+fi
+
+# 2. Check for unpushed commits in Internal
+if [[ -n $(git -C "$SUBMODULE_PATH" cherry -v origin/main 2>/dev/null) ]]; then
+    echo -e "${RED}ERR: INTERNAL COMMITS NOT PUSHED TO REMOTE${NC}"
+    echo -e "Action: ${GREEN}cd $SUBMODULE_PATH && git push origin main${NC}"
+    exit 1
+fi
+
+# 3. Check if Parent Pointer is outdated
+if [[ -n $(git diff "$SUBMODULE_PATH") ]]; then
+    echo -e "${YELLOW}ERR: PARENT POINTER OUTDATED${NC}"
+    echo -e "Action: ${GREEN}git add $SUBMODULE_PATH && git commit -m 'chore: sync internal'${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}✓ Internal & Parent are synced. Pushing Public...${NC}"
+git push origin main
+

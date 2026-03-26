@@ -1,0 +1,12 @@
+# Documentation & Strategy (includes all .md and private submodule)
+/docs
+
+# Local Development Scripts
+/bin
+
+# Standard Expo/RN ignores
+node_modules/
+.expo/
+ios/
+android/
+
