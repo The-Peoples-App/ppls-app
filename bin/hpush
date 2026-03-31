@@ -18,17 +18,30 @@ if [[ -n $(git -C "$SUBMODULE_PATH" status --porcelain) ]]; then
 fi
 
 # 2. Check for unpushed commits in Internal
+git -C "$SUBMODULE_PATH" fetch origin main # Ensure we know what the remote actually has
+
 if [[ -n $(git -C "$SUBMODULE_PATH" cherry -v origin/main 2>/dev/null) ]]; then
     echo -e "${RED}ERR: INTERNAL COMMITS NOT PUSHED TO REMOTE${NC}"
     echo -e "Action: ${GREEN}cd $SUBMODULE_PATH && git push origin main${NC}"
     exit 1
 fi
 
-# 3. Check if Parent Pointer is outdated
+# 3. Sync submodule to main (The Hybrid Way)
+echo -e "${YELLOW}Syncing internal submodule to latest main...${NC}"
+
+# Pull the latest 'main' from GitHub based on .gitmodules config
+git submodule update --remote --merge
+
+# 4. Check & auto-commit the pointer
+# If the sync above moved the 'pointer', we need to bake that into a public commit
 if [[ -n $(git diff "$SUBMODULE_PATH") ]]; then
-    echo -e "${YELLOW}ERR: PARENT POINTER OUTDATED${NC}"
-    echo -e "Action: ${GREEN}git add $SUBMODULE_PATH && git commit -m 'chore: sync internal'${NC}"
-    exit 1
+    echo -e "${YELLOW}POINTER UPDATED: Syncing parent to latest internal state...${NC}"
+    git add "$SUBMODULE_PATH"
+    
+    # We use a standard message so we don't have to prompt the user
+    git commit -m "chore: auto-sync internal pointer to main"
+else
+    echo -e "${GREEN}✓ Internal & Parent are already in sync.${NC}"
 fi
 
 echo -e "${GREEN}✓ Internal & Parent are synced. Pushing Public...${NC}"
