@@ -23,6 +23,6 @@ Our conformance is verified through a combination of automated testing and manua
 ## Feedback & Support
 We welcome feedback on the accessibility of our app. If you encounter barriers, please contact our **Technical Stewardship Team**:
 
-Email: [tech@peoplesapp.la](mailto:tech@peoplesapp.la)
+Email: [tech@peoplesapp.org](mailto:tech@peoplesapp.org)
 Response Aim: We strive to respond to all accessibility inquiries within two business days.
 
