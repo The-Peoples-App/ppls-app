@@ -29,6 +29,7 @@ This script builds on the logic in ADR-015 by adding the Redis/Vector push.
 const fs = require('fs');
 const matter = require('gray-matter');
 const { Redis } = require('@langchain/community/vectorstores/redis');
+const { MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter } = require("@langchain/textsplitters");
 const { OpenAIEmbeddings } = require('@langchain/openai');
 
 async function buildAISemanticLayer() {
@@ -37,29 +38,48 @@ async function buildAISemanticLayer() {
     // Convert frontmatter and grab content
     const { data, content } = matter(file);
 
-    // 1. Prepare chunks (Linking to ADR-015 Metadata)
-    const doc = {
-        pageContent: content,
+    // 1. First Pass: Split by Markdown Headers
+    const headerSplitter = new MarkdownHeaderTextSplitter({
+        headersToSplitOn: [
+            ["#", "H1"],
+            ["##", "H2"],
+            ["###", "H3"],
+        ],
+    });
+    const headerIntermediateDocs = await headerSplitter.splitText(content);
+
+    // 2. Second Pass: Recursively split large header sections into smaller chunks
+    const recursiveSplitter = new RecursiveCharacterTextSplitter({
+        chunkSize: 500, // Adjust based on the LLM's context window needs
+        chunkOverlap: 50,
+    });
+
+    // Create the final array of Documents with inherited header metadata
+    const finalDocs = await recursiveSplitter.splitDocuments(headerIntermediateDocs);
+
+    // 3. Map ADR-015 Global Metadata onto every chunk
+    const docsWithMetadata = finalDocs.map(doc => ({
+        ...doc,
         metadata: {
+            ...doc.metadata, // Keeps H1, H2, etc.
             id: data.id,
             section: data.section,
             page: data.page,
             source: 'calfresh_p37.md'
         }
-    };
+    }));
 
-    // 2. Initialize Redis Vector Store
-    const vectorStore = await Redis.fromTexts(
-        [doc.pageContent], /* The Goods */
-        [doc.metadata], /* The Labels */
-        new OpenAIEmbeddings(), /* The Packager (Goods -> Vector)*/
-        { /* Config */
-            redisClient: myRedisClient, /* DB ('warehouse') */
-            indexName: "guide_index", /* Table */
+    // 4. Initialize Redis Vector Store
+    const vectorStore = await Redis.fromDocuments(
+        docsWithMetadata, // Use fromDocuments instead of fromTexts
+        new OpenAIEmbeddings(),
+        {
+            redisClient: myRedisClient,
+            indexName: "guide_index",
         }
     );
 
-    console.log(`✅ Indexed ${data.id} into AI Semantic Layer.`);
+    console.log(`Indexed ${docsWithMetadata.length} chunks for ${data.id}.`);
 }
 ```
 
@@ -82,10 +102,16 @@ const results = await vectorStore.similaritySearch(query, 3);
 
 /*
 [
-  {
-    pageContent: "You can apply for CalFresh in person... have your ID and Rent Receipt ready.",
-    metadata: { id: "calfresh-how-to", page: 37, section: "CalFresh" }
-  }
+    {
+      "pageContent": "...small 500 character snippet...",
+      "metadata": {
+        "H1": "Applying for CalFresh",
+        "H2": "Required Documents",
+        "id": "calfresh-how-to",
+        "page": 37,
+        "section": "CalFresh"
+      }
+    }
 ]
 */
 ```
