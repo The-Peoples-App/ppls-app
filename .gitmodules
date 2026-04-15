@@ -1,4 +1,4 @@
 [submodule "docs/internal"]
 	path = docs/internal
-	url = ../ppls-app-internal
+	url = https://github.com/travisjupp/ppls-app-internal
 	branch = main
