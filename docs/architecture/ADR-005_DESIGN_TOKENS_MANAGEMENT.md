@@ -51,6 +51,4 @@ To guarantee 7:1 (AAA) contrast, we will prioritize these pairings:
 ## Consequences
 - **Pro:** Automated Compliance. The system "prevents" the designer from picking a non-accessible color.
 - **Pro:** High Velocity. Changing the brand color updates the entire app (3 tiers) instantly.
-- **Advancement:** Proves "Design Systems Engineering" expertise—moving beyond "styling" into "systemic architecture."
-
 

@@ -23,5 +23,4 @@ Using **React Native Paper**, we will build "Compound Components."
 
 ## 5. Module Decoupling (The "Unix" Philosophy)
 Following the Unix-centric DX, we will treat the **SNAP Wizard** and **Map Engine** as separate packages within a **Monorepo (Turborepo/Yarn Workspaces)**. 
-- **Advancement:** This allows the "Ingestion Engine" to be sold or licensed to other NGOs as a standalone tool.
 
