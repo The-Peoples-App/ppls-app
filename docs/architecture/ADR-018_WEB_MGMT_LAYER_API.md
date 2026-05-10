@@ -1,10 +1,10 @@
-## ADR-017: Web Management Layer & API (Astro Actions)
+## ADR-018: Web Management Layer & API (Astro Actions)
 
 ## Status
 Proposed (Epic: Infra/DX)
 
 ## Context
-We need a centralized "Command Center" to manage the digital guide, host the staff update pipeline (ADR-016), and provide an API for the React Native "Ask AI" feature. Traditional REST APIs require significant boilerplate (routing, validation, types).
+We need a centralized "Command Center" to manage the digital guide, host the staff update pipeline ([ADR-015](./ADR-015_SSG_ENGINE_SELECTION.md)), and provide an API for the React Native "Ask AI" feature. Traditional REST APIs require significant boilerplate (routing, validation, types).
 
 ## Decision
 We will utilize Astro as the web-based management layer and Astro Actions as the primary API bridge for the native app.
@@ -12,7 +12,7 @@ We will utilize Astro as the web-based management layer and Astro Actions as the
    1. Server-Side Execution: All Redis and LLM interactions will happen within Astro Actions, keeping sensitive API keys hidden from the client.
    2. Type Safety (Zod): Actions will use Zod to validate that questions sent from the mobile app are properly formatted strings, reducing runtime crashes.
    3. Deployment: The Astro site will be deployed as a Node.js SSR server (or Vercel/Netlify functions) to allow for dynamic AI generation.
-   4. Admin UI: Staff will use the Astro frontend to preview Markdown changes and manually trigger the "Push to Redis" (ADR-016) pipeline if needed.
+   4. Admin UI: Staff will use the Astro frontend to preview Markdown changes and, following review ([ADR-009](./ADR-009_STAGED_CONTENT_GOVERNANCE.md)), the Technical Lead can manually trigger the "Push to Redis" ([ADR-016](./ADR-016_AI_SEMANTIC_LAYER.md)) pipeline if needed.
 
 ## Consequences
 
