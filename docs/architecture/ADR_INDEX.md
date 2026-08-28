@@ -1,35 +1,40 @@
 # Techinical Governance ("Senior Architect" Layer)
 
-ADR-001: Local-First Sync Architecture (Expo SQLite + Drizzle). Ensuring utility in data-deserts.
+`ADR-001`: Local-First Sync Architecture (Expo SQLite + Drizzle). Ensuring utility in data-deserts.
 
-ADR-002: Modular Feature Gating. Architecture for Tiered "Plug-and-Play" scalability.
+`ADR-002`: The "Air-Gapped" Integrity Logic (AI cannot modify primary Guide Text)
 
-ADR-003: Single Source of Truth (SSOT) Data Architecture
+`ADR-003`: Single Source of Truth (SSOT) Data Architecture
 
-ADR-004: Gov-Level Accessibility (A11y) Standards
+`ADR-004`: Gov-Level Accessibility (A11y) Standards
 
-ADR-005: Design Token Management (Material Design 3 / Paper sync)
+`ADR-005`: Design Token Management (Material Design 3 / Paper sync)
 
-ADR-006: Privacy-First Social Telemetry (Anonymous impact tracking)
+`ADR-006`: Privacy-First Social Telemetry (Anonymous impact tracking)
 
-ADR-007: Stakeholder Communication & Transparency Framework
+`ADR-007`: Stakeholder Communication & Transparency Framework
 
-ADR-008: Content Management Strategy (CMS)
+`ADR-008`: Content Management Strategy (CMS)
 
-ADR-009: Staged Content Governance & Super-Admin Approval
+`ADR-009`: Staged Content Governance & Super-Admin Approval
 
-ADR-013: Data Enrichment & Third-Party API Integration
+`ADR-013`: Data Enrichment & Third-Party API Integration
 
-ADR-014: Hybrid Content Delivery (Static vs. Semantic)
+`ADR-014`: Hybrid Content Delivery (Static vs. Semantic)
 
-ADR-015: SSG Engine Selection (Markdown-to-Native)
+`ADR-015`: SSG Engine Selection (Markdown-to-Native)
 
-ADR-017: Component Registry & Widget Architecture
+`ADR-016`: AI Semantic Layer (Redis powered RAG)
 
-ADR-019: Gold Tier Impact Intelligence Dashboard
+`ADR-017`: Component Registry & Widget Architecture
 
-ADR-021: Resilient Localization (i18next + Locize Fallback)
+`ADR-018`: Web Management Layer (Staff Update Pipeline/Ask AI API)
 
-ADR-022: Content Update Strategy (Bundled vs. Remote)
+`ADR-019`: Gold Tier Impact Intelligence Dashboard (Proof of Impact)
 
+`ADR-021`: Resilient Localization (i18next + Locize Fallback)
+
+`ADR-022`: Content Update Strategy (Bundled vs. Remote)
+
+`EXTENSIBILITY_STRATEGY`: Modular Feature Gating. Architecture for Tiered "Plug-and-Play" scalability.
 
