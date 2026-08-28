@@ -43,6 +43,7 @@
 ## Diagrams
 
 [`DGRM-015`][DGRM-015]: Ingestion Flow: Staff Update to Redis/App (Markdown to Searchable AI)
+
 [`DGRM-016`][DGRM-016]: Ask AI Sequence (Native App Digital Guide Queries)
 
 -------------------------
@@ -66,6 +67,6 @@
 [ADR-019]: ./ADR-019_STAKEHOLDER_DATA_DASHBOARD.md
 [ADR-021]: ./ADR-021_RESILIENT_LOCALIZATION.md
 [ADR-022]: ./ADR-022_CONTENT_UPDATE_STRATEGY.md
-[DGRM-015]: ./DGRM-015_ASK_AI_SEQUENCE.md
-[DGRM-016]: ./INGESTION_FLOW.md
+[DGRM-015]: ./DGRM-015_INGESTION_FLOW.md
+[DGRM-016]: ./DGRM-016_ASK_AI_SEQUENCE.md
 [EXTENSIBILITY_STRATEGY]: ./EXTENSIBILITY_STRATEGY.md
