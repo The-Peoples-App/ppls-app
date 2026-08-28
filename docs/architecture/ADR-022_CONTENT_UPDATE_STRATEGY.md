@@ -8,7 +8,8 @@ HALA staff updates the guide frequently. We need to balance "Update Speed" with 
 
 ## Decision
 1. **Bronze Pilot:** Utilize **Static Bundling**. Content is updated via EAS Updates (OTA) which replaces the local JSON bundle. This keeps costs at $0 and ensures 100% offline availability.
-2. **Silver Tier:** Transition to a **Remote-Fetch Model**. The app will check Firestore for "Delta Updates" (changes only) to the p37-44 text, allowing for minute-by-minute accuracy.
+2. **Silver Tier:** Transition to an **Edge-Fetch Model**. The app checks an AstroJS API endpoint for dynamic delta updates served instantly out of a flat-rate Redis timestamp cache to keep synchronization resource costs at zero.
+
 
 ## Operational Release Cadence
 ### Bronze Pilot (Scheduled Batches): 
@@ -24,7 +25,7 @@ To ensure maximum uptime and security, we distinguish between "Content" and "Inf
 
 ### Silver/Gold Tier (On-Demand Remote):
 - **Workflow:** Staff makes an update in the **Headless CMS (ADR-008)**. 
-- **Deployment:** The CMS triggers a **Firestore Sync Event**. 
+- **Deployment:** The CI/CD pipeline triggers the local build script, generating new vector embeddings and updating the Redis timestamp index.
 - **Effect:** The app "presents" the update to the user within seconds. This is reserved for high-volatility data like "Emergency Pop-up Pantries" or "Temporary Office Closures."
 
 ## Consequences

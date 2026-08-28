@@ -1,12 +1,12 @@
 # ADR-001: Local-First Sync Architecture (Data resilience)
 
 ## Context
-The People's App serves vulnerable demographics requiring offline data access under zero-data environments. Initial proposals leaned on cloud-locked document stores (Firestore), which create cost vulnerabilities tied directly to document-read volumes.
+The People's App serves vulnerable demographics requiring offline data access under zero-data environments. Initial proposals leaned on cloud-locked document stores (Firestore), which create cost vulnerabilities tied directly to document-read volumes. We reject this in favor of client-side Expo SQLite tables managed via Drizzle ORM.
 
 ## Decision
 We will employ a **Local-First Architecture** leveraging **Expo SQLite** orchestrated via **Drizzle ORM** as the primary on-device data platform. The client application will treat local device databases as the exclusive source of truth. 
 
-The server-side layer will use **AstroJS** edge endpoints backed by a **Redis** caching pipeline to serve timestamped delta sync structures. All client modifications will log to a local `mutations_outbox` database table and sync asynchronously upon detecting an active internet connection.
+The server-side layer will use **AstroJS** edge endpoints backed by a **Redis** caching pipeline to serve timestamped delta sync structures (Timestamp Cache). All client modifications will log to a local `mutations_outbox` database table and sync asynchronously upon detecting an active internet connection.
 
 ## Technical Implementation Blueprint: Drizzle Schemas
 

@@ -2,7 +2,7 @@
 
 ## 1. The "Interface-First" Core
 To ensure the Pilot (Bronze) can scale to Gold, we will use **Abstract Interfaces** for all data fetching. 
-- **Bronze:** `ResourceService` fetches from a local Firestore cache.
+- **Bronze:** `ResourceService` reads directly from the device's native SQLite storage context instantiated by Drizzle.
 - **Gold:** `ResourceService` is extended to include `AISearchProvider` without changing the UI components.
 
 ## 2. Feature Gating & Configuration
@@ -16,7 +16,7 @@ Using **React Native Paper**, we will build "Compound Components."
   - **Bronze:** Slot renders a "Call" button. 
   - **Gold:** Slot renders an "Check SNAP Eligibility" button via a dynamic injection pattern.
 
-## 4. Schema Versioning (Firestore)
+## 4. Schema Versioning (SQLite Migrations via Drizzle)
 - **Pilot Schema:** Focuses on `Identity` (Name, Location, Category).
 - **Extensibility Attribute:** Every document includes a `metadata: Map<string, any>` field. 
 - **Evolution:** As we move to Gold, we populate `metadata.eligibility_rules` to feed the AI Wizard, requiring **zero** database migrations.

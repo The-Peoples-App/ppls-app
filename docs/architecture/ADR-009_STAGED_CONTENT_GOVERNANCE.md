@@ -8,9 +8,9 @@ HALA staff require the ability to update the "Peoples Guide" content frequently.
 
 ## Decision
 We will implement a **Staged Approval Pipeline** for all content updates.
-1. **The Staging Layer:** Staff updates are first pushed to a "Draft" collection in Firestore or a dedicated Git branch (`content-staging`).
+1. **The Staging Layer:** Staff updates are isolated on a dedicated Git branch (`content-staging`) or local draft directories for validation before compilation.
 2. **The Review Logic:** A simple internal dashboard or PR (Pull Request) process allows the Technical Lead to review changes against the **A11y/AAA Standards (ADR-004)**.
-3. **The Promotion:** Only upon Lead approval is the data "promoted" to the production `bundled-guide.json` or live Firestore environment.
+3. **The Promotion:** Only upon Lead approval and merge into main is the data "promoted" to build production assets (`bundled-guide.json`) and synced to the Redis vector layer.
 
 ## Consequences
 - **Pro:** High Data Integrity. Ensures that no broken tables or unverified numbers reach the community.

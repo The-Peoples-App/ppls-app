@@ -11,7 +11,8 @@ The Peoples App will act as a **Primary Source of Truth**.
 1. **The Baseline:** Initial data is ingested from HALA's verified Guide.
 2. **The Update Engine:** We will implement a "Suggest an Edit" feature in the **Silver Tier**. 
 3. **The Governance:** All community-submitted changes (hours, closures) are staged in a **Verification Queue** for HALA staff approval (ADR-009).
-4. **The SSOT:** Verified data in our Firestore becomes the authoritative digital record.
+4. **The SSOT:** Verified data compiled into our static `bundled-guide.json` by the build pipeline serves as the absolute, authoritative digital record (Single Source of Truth).
+
 
 ## Consequences
 - **Pro:** Total Data Sovereignty. We don't break if a third-party API goes down.

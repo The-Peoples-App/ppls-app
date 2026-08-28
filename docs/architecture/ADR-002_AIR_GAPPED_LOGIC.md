@@ -8,7 +8,7 @@ Stakeholders (HALA Board) expressed concern regarding AI "hallucinations" or ina
 ## Decision
 We will implement a Physical Logic Air-Gap within the application architecture:
 
-   1. Verified Layer (ReadOnly): The primary guide text is served from a static, read-only Firestore collection (ingested from the PDF). It is immutable by the AI.
+   1. Verified Layer (ReadOnly): The primary guide text is served from an immutable, local static file (`assets/bundled-guide.json`) derived directly from verified staff Markdown files. It is structurally air-gapped from and immutable by the AI layer.
    2. AI Sandbox (Semantic Search): The "Ask HALA" module operates in a separate sandbox. It can read the verified layer to provide answers but has zero "write" or "edit" permissions.
    3. UI Enforcement: The "Toggle of Truth" (Pilot Toggle) explicitly switches the user's context between these two isolated data streams.
 

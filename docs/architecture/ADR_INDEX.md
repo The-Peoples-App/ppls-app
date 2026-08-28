@@ -1,6 +1,6 @@
 # Techinical Governance ("Senior Architect" Layer)
 
-ADR-001: Offline-First Firestore Strategy. Ensuring utility in data-deserts.
+ADR-001: Local-First Sync Architecture (Expo SQLite + Drizzle). Ensuring utility in data-deserts.
 
 ADR-002: Modular Feature Gating. Architecture for Tiered "Plug-and-Play" scalability.
 
