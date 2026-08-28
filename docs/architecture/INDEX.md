@@ -1,5 +1,7 @@
 # Techinical Governance ("Senior Architect" Layer)
 ## Architectural Decision Records
+[`ADR-000`][ADR-000]: Overview of Core Decisions (Summary of `docs/architecture` files)
+
 [`ADR-001`][ADR-001]: Local-First Sync Architecture (Expo SQLite + Drizzle). Ensuring utility in data-deserts.
 
 [`ADR-002`][ADR-002]: The "Air-Gapped" Integrity Logic (AI cannot modify primary Guide Text)
@@ -46,8 +48,9 @@
 
 [`DGRM-016`][DGRM-016]: Ask AI Sequence (Native App Digital Guide Queries)
 
--------------------------
 
+
+[ADR-000]: ./ADR-000_OVERVIEW.md
 [ADR-001]: ./ADR-001_OFFLINE_FIRST.md
 [ADR-002]: ./ADR-002_AIR_GAPPED_LOGIC.md
 [ADR-003]: ./ADR-003_SSOT_DATA_ARCHITECTURE.md
