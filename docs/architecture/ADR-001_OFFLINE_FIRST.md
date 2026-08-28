@@ -106,9 +106,10 @@ export const mutationsOutbox = sqliteTable('mutations_outbox', {
 * **Cons:** Requires manual development of backend synchronization and conflict resolution logic (Last-Write-Wins pattern) on Astro API endpoints.
 
 
-https://docs.expo.dev/guides/local-first/
-https://www.pkgpulse.com/guides/expo-sqlite-vs-watermelondb-vs-realm-react-native-local-2026
-https://dev.to/sathish_daggula/how-to-build-offline-first-sqlite-sync-in-expo-1lli
-https://github.com/drizzle-team/drizzle-orm/discussions/5135
-https://javascript.plainenglish.io/react-native-2026-mastering-offline-first-architecture-ad9df4cb61ae
-https://www.adaptnxt.com/blogs/building-offline-first-react-native-apps
+https://docs.expo.dev/guides/local-first/  
+https://www.pkgpulse.com/guides/expo-sqlite-vs-watermelondb-vs-realm-react-native-local-2026  
+https://dev.to/sathish_daggula/how-to-build-offline-first-sqlite-sync-in-expo-1lli  
+https://github.com/drizzle-team/drizzle-orm/discussions/5135  
+https://javascript.plainenglish.io/react-native-2026-mastering-offline-first-architecture-ad9df4cb61ae  
+https://www.adaptnxt.com/blogs/building-offline-first-react-native-apps  
+
